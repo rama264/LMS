@@ -28,7 +28,7 @@ include 'private/validity1.php'; //  for user validation
 
 <body>
 
-    <h1>LIBRARY MANAGEMENT SYSTEM</h1>
+<h1 class="title">LIBRARY MANAGEMENT SYSTEM</h1>
 
     <div class="container">
 
