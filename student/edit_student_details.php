@@ -31,6 +31,8 @@ require('dbconn.php');
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="index.php">Your Profile</a></li>
+                                    <!--li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li-->
                                     <li class="divider"></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
@@ -49,7 +51,11 @@ require('dbconn.php');
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home</a></li>
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                </a></li>
+                                 <li><a href="message.php"><i class="menu-icon icon-inbox"></i>Messages</a>
+                                </li>
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -74,7 +80,7 @@ require('dbconn.php');
 
                                 $name=$row['Name'];
                                 $category=$row['Category'];
-                                $department=$row['Department'];
+                                 $department=$row['Department'];
                                 $email=$row['EmailId'];
                                 $mobno=$row['MobNo'];
                                 $pswd=$row['Password'];
@@ -97,7 +103,9 @@ require('dbconn.php');
                                                     <option value="Student">Student</option>
                                                     <option value="Faculty">Faculty</option>
                                                     <option value="Staff">Staff</option>
-                                                     </select>
+                                                    
+                                                </select>
+
                                             </div>
                                     </div>
                                       <div class="control-group">
@@ -108,7 +116,9 @@ require('dbconn.php');
                                                     <option value="Compstud">Compstud</option>
                                                     <option value="Education">Education</option>
                                                     <option value="Agriculture">Agriculture</option>
+                                                    
                                                 </select>
+                                                
                                             </div>
                                     </div>
 
@@ -137,23 +147,26 @@ require('dbconn.php');
                                             <div class="controls">
                                                 <button type="submit" name="submit"class="btn-primary"><center>Update Details</center></button>
                                             </div>
-                                        </div>                                 
+                                        </div>                                                                     
 
                                 </form>
                     		           
-
                         </div>
-                    </div> 	
-                </div>                   
+                        </div> 	
+                    </div>
+                    
+                    <!--/.span9-->
+                </div>
             </div>
+            <!--/.container-->
         </div>
-
-        <div class="footer">
+<div class="footer">
             <div class="container">
                 <b class="copyright"><p> &copy; 2025 Library Management System. </p></b>All rights reserved.
             </div>
         </div>
         
+        <!--/.wrapper-->
         <script src="scripts/jquery-1.9.1.min.js" type="text/javascript"></script>
         <script src="scripts/jquery-ui-1.10.1.custom.min.js" type="text/javascript"></script>
         <script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
@@ -168,19 +181,23 @@ if(isset($_POST['submit']))
     $rollno = $_GET['id'];
     $name=$_POST['Name'];
     $category=$_POST['Category'];
-    $department=$_POST['Department'];
+      $department=$_POST['Department'];
     $email=$_POST['EmailId'];
     $mobno=$_POST['MobNo'];
     $pswd=$_POST['Password'];
 
-    $sql1="update LMS.user set Name='$name', Category='$category', Department = '$department', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
+$sql1="update LMS.user set Name='$name', Category='$category', Department = '$department', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
 
-    if($conn->query($sql1) === TRUE){
-        echo "<script type='text/javascript'>alert('Success')</script>";
-        header( "Refresh:0.01; url=index.php", true, 303);
-    } else {
-        echo "<script type='text/javascript'>alert('Error')</script>";
-    }
+
+
+if($conn->query($sql1) === TRUE){
+echo "<script type='text/javascript'>alert('Success')</script>";
+header( "Refresh:0.01; url=index.php", true, 303);
+}
+else
+{//echo $conn->error;
+echo "<script type='text/javascript'>alert('Error')</script>";
+}
 }
 ?>
       

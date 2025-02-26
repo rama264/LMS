@@ -3,6 +3,7 @@ ob_start();
 require('dbconn.php');
 ?>
 
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,6 +31,8 @@ require('dbconn.php');
                                 <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="index.php">Your Profile</a></li>
+                                    <!--li><a href="#">Edit Profile</a></li>
+                                    <li><a href="#">Account Settings</a></li-->
                                     <li class="divider"></li>
                                     <li><a href="logout.php">Logout</a></li>
                                 </ul>
@@ -48,7 +51,10 @@ require('dbconn.php');
                     <div class="span3">
                         <div class="sidebar">
                             <ul class="widget widget-menu unstyled">
-                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home</a></li>
+                                <li class="active"><a href="index.php"><i class="menu-icon icon-home"></i>Home
+                                </a></li>
+                                </li>
+                                <li><a href="book.php"><i class="menu-icon icon-book"></i>All Books </a></li>
                             </ul>
                             <ul class="widget widget-menu unstyled">
                                 <li><a href="logout.php"><i class="menu-icon icon-signout"></i>Logout </a></li>
@@ -77,7 +83,7 @@ require('dbconn.php');
                                 $mobno=$row['MobNo'];
                                 $pswd=$row['Password'];
                                 ?>    
-
+                    			
                                 <form class="form-horizontal row-fluid" action="edit_student_details.php?id=<?php echo $rollno ?>" method="post">
 
                                     <div class="control-group">
@@ -126,19 +132,20 @@ require('dbconn.php');
                                             <div class="controls">
                                                 <button type="submit" name="submit"class="btn-primary"><center>Update Details</center></button>
                                             </div>
-                                        </div>                                                                      
+                                        </div>                                                                     
 
                                 </form>
-                               
-                            </div>
-                        </div>  
+                    		           
+                        </div>
+                        </div> 	
                     </div>
+                    
                     <!--/.span9-->
                 </div>
             </div>
             <!--/.container-->
         </div>
-        <div class="footer">
+<div class="footer">
             <div class="container">
                 <b class="copyright"><p> &copy; 2025 Library Management System. </p></b>All rights reserved.
             </div>
@@ -165,13 +172,15 @@ if(isset($_POST['submit']))
 
 $sql1="update LMS.user set Name='$name', Category='$category', EmailId='$email', MobNo='$mobno', Password='$pswd' where RollNo='$rollno'";
 
+
+
 if($conn->query($sql1) === TRUE){
-    echo "<script type='text/javascript'>alert('Success')</script>";
-    header( "Refresh:0.01; url=index.php", true, 303);
+echo "<script type='text/javascript'>alert('Success')</script>";
+header( "Refresh:0.01; url=index.php", true, 303);
 }
 else
-{
-    echo "<script type='text/javascript'>alert('Error')</script>";
+{//echo $conn->error;
+echo "<script type='text/javascript'>alert('Error')</script>";
 }
 }
 ?>

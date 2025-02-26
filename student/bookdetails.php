@@ -1,6 +1,7 @@
-﻿<?php
+<?php
 require('dbconn.php');
 ?>
+
 <?php 
 if ($_SESSION['RollNo']) {
     ?>
@@ -64,48 +65,63 @@ if ($_SESSION['RollNo']) {
                         <!--/.sidebar-->
                     </div>
                     <!--/.span3-->
-                    <div class="span9">
-                    	<center>
-                           	<div class="card" style="width: 50%;"> 
-                    			<img class="card-img-top" src="images/profile2.png" alt="Card image cap">
-                    			<div class="card-body">
-
-                                <?php
-                                $rollno = $_SESSION['RollNo'];
-                                $sql="select * from LMS.user where RollNo='$rollno'";
-                                $result=$conn->query($sql);
-                                $row=$result->fetch_assoc();
-
-                                $name=$row['Name'];
-                                $category=$row['Category'];
-                                $email=$row['EmailId'];
-                                $mobno=$row['MobNo'];
-                                ?>    
-                    				<i>
-                    				<h1 class="card-title"><center><?php echo $name ?></center></h1>
-                    				<br>
-                    				<p><b>Email ID: </b><?php echo $email ?></p>
-                    				<br>
-                    				<p><b>ID No: </B><?php echo $rollno ?></p>
-                    				<br>
-                    				<p><b>Category: </b><?php echo $category ?></p>
-                    				<br>
-                    				<p><b>Mobile number: </b><?php echo $mobno ?></p>
-                    				</b>
-                                </i>
-
-                    			</div>
-                    		</div>
-                            <br>
-                            <a href="edit_student_details.php" class="btn btn-primary">Edit Details</a>    
-      					</center>              	
-                    </div>
                     
+                    <div class="span9">
+                        <div class="content">
+
+                        <div class="module">
+                            <div class="module-head">
+                                <h3>Book Details</h3>
+                            </div>
+                            <div class="module-body">
+                      <?php
+                            $x=$_GET['id'];
+                            $sql="select * from LMS.book where BookId='$x'";
+                            $result=$conn->query($sql);
+                            $row=$result->fetch_assoc();    
+                            
+                                $bookid=$row['BookId'];
+                                $section=$row['Section'];
+                                 $subject=$row['Subject'];
+                                $name=$row['Textbook'];
+                                $vol=$row['Volume'];
+                                $year=$row['Year'];
+                                $avail=$row['Availability'];
+                                 $author=$row['Author'];
+                                  $isbn=$row['ISBN'];
+                                $status=$row['Status'];  
+                                echo "<b>Book ID:</b> ".$bookid."<br><br>";
+                                echo "<b>Section:</b> ".$section."<br><br>";
+                                 echo "<b>Subject:</b> ".$subject."<br><br>";
+                                echo "<b>Textbook:</b> ".$name."<br><br>";
+                                echo "<b>Year:</b> ".$year."<br><br>";
+                                  echo "<b>Availability:</b> ".$avail."<br><br>";
+                                    echo "<b>Author:</b> ".$author."<br><br>";
+                                      echo "<b>ISBN:</b> ".$isbn."<br><br>";
+                                echo "<b>Book Description:</b> ".$status."<br><br>";
+
+                                
+                        
+                           
+                            ?>
+                            
+                        <a href="book.php" class="btn btn-primary">Go Back</a>                             
+                               </div>
+                           </div>
+                            </div>
+                    <!--/.span3-->
+                    <!--/.span9-->
+                
+                    <!--/.span3-->
+                    <!--/.span9-->
+                </div>
+                    
+                    <!--/.span9-->
+                </div>
                     <!--/.span9-->
                 </div>
             </div>
             <!--/.container-->
-        </div>
 <div class="footer">
             <div class="container">
                 <b class="copyright"><p> &copy; 2025 Library Management System. </p> </b>All rights reserved.
@@ -124,6 +140,7 @@ if ($_SESSION['RollNo']) {
     </body>
 
 </html>
+
 <?php }
 else {
     echo "<script type='text/javascript'>alert('Access Denied!!!')</script>";
